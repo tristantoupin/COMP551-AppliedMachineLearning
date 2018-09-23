@@ -1,0 +1,28 @@
+Question 1. Sampling
+
+Movies: 0.2
+COMP-551: 0.4 
+Playing: 0.1
+Studying: 0.3
+
+or 
+
+Movies: 	[0.0, 0.2)
+COMP-551: 	[0.2, 0.6)
+Playing: 	[0.6, 0.7)
+Studying: 	[0.7, 1.0)
+
+1.1
+
+# generate random number between [0, 1)
+int r = random.generate(0,1)
+string choice = None
+
+if r < 0.2 :
+	choice = "Movies"
+else if r < 0.6 :
+	choice = "COMP-551"
+else if r < 0.6 :
+	choice = "Playing"
+else :
+	choice = "Studying"
