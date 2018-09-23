@@ -1,5 +1,6 @@
 Question 1. Sampling
 
+'''
 Movies: 0.2
 COMP-551: 0.4 
 Playing: 0.1
@@ -11,18 +12,22 @@ Movies: 	[0.0, 0.2)
 COMP-551: 	[0.2, 0.6)
 Playing: 	[0.6, 0.7)
 Studying: 	[0.7, 1.0)
+'''
 
-1.1
+-- Q1.1
+
 
 # generate random number between [0, 1)
-int r = random.generate(0,1)
-string choice = None
+r = random.generate(min = 0, max = 1)
+activity_today = None
 
 if r < 0.2 :
-	choice = "Movies"
+	activity_today = "Movies"
 else if r < 0.6 :
-	choice = "COMP-551"
+	activity_today = "COMP-551"
 else if r < 0.6 :
-	choice = "Playing"
+	activity_today = "Playing"
 else :
-	choice = "Studying"
+	activity_today = "Studying"
+
+return activity_today
