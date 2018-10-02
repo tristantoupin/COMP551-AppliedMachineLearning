@@ -1,0 +1,767 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Q.4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}306}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{requests}
+          \PY{k+kn}{import} \PY{n+nn}{io}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{random} \PY{k}{as} \PY{n+nn}{rd}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{url\PYZus{}data} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/communities/communities.data}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{url\PYZus{}desc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://archive.ics.uci.edu/ml/machine\PYZhy{}learning\PYZhy{}databases/communities/communities.names}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{options}\PY{o}{.}\PY{n}{display}\PY{o}{.}\PY{n}{max\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{6}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n}{data} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url\PYZus{}data}\PY{p}{)}\PY{o}{.}\PY{n}{content}
+          \PY{n}{columns\PYZus{}name\PYZus{}data} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url\PYZus{}desc}\PY{p}{)}\PY{o}{.}\PY{n}{content}
+          \PY{n}{columns\PYZus{}name} \PY{o}{=} \PY{p}{[}\PY{n}{k}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{p}{(}\PY{p}{(}\PY{n}{columns}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{@attribute}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{k}\PY{p}{]}
+          \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{io}\PY{o}{.}\PY{n}{StringIO}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{decode}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{names} \PY{o}{=} \PY{n}{columns\PYZus{}name}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{part-1}{%
+\subsection{Part 1}\label{part-1}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{c+c1}{\PYZsh{} prep dataset}
+          \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{n}{df}\PY{p}{:}
+              \PY{n}{df}\PY{p}{[}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{errors} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:}       state  county  community  communityname  fold  population  \textbackslash{}
+          0         8     NaN        NaN   Lakewoodcity     1        0.19   
+          1        53     NaN        NaN    Tukwilacity     1        0.00   
+          2        24     NaN        NaN   Aberdeentown     1        0.00   
+          {\ldots}     {\ldots}     {\ldots}        {\ldots}            {\ldots}   {\ldots}         {\ldots}   
+          1991      9     9.0    80070.0  Waterburytown    10        0.16   
+          1992     25    17.0    72600.0    Walthamcity    10        0.08   
+          1993      6     NaN        NaN    Ontariocity    10        0.20   
+          
+                householdsize  racepctblack  racePctWhite  racePctAsian  \textbackslash{}
+          0              0.33          0.02          0.90          0.12   
+          1              0.16          0.12          0.74          0.45   
+          2              0.42          0.49          0.56          0.17   
+          {\ldots}             {\ldots}           {\ldots}           {\ldots}           {\ldots}   
+          1991           0.37          0.25          0.69          0.04   
+          1992           0.51          0.06          0.87          0.22   
+          1993           0.78          0.14          0.46          0.24   
+          
+                       {\ldots}           LandArea  PopDens  PctUsePubTrans  PolicCars  \textbackslash{}
+          0            {\ldots}               0.12     0.26            0.20       0.06   
+          1            {\ldots}               0.02     0.12            0.45        NaN   
+          2            {\ldots}               0.01     0.21            0.02        NaN   
+          {\ldots}          {\ldots}                {\ldots}      {\ldots}             {\ldots}        {\ldots}   
+          1991         {\ldots}               0.08     0.32            0.18       0.08   
+          1992         {\ldots}               0.03     0.38            0.33       0.02   
+          1993         {\ldots}               0.11     0.30            0.05       0.08   
+          
+                PolicOperBudg  LemasPctPolicOnPatr  LemasGangUnitDeploy  \textbackslash{}
+          0              0.04                 0.90                  0.5   
+          1               NaN                  NaN                  NaN   
+          2               NaN                  NaN                  NaN   
+          {\ldots}             {\ldots}                  {\ldots}                  {\ldots}   
+          1991           0.06                 0.78                  0.0   
+          1992           0.02                 0.79                  0.0   
+          1993           0.04                 0.73                  0.5   
+          
+                LemasPctOfficDrugUn  PolicBudgPerPop  ViolentCrimesPerPop  
+          0                    0.32             0.14                 0.20  
+          1                    0.00              NaN                 0.67  
+          2                    0.00              NaN                 0.43  
+          {\ldots}                   {\ldots}              {\ldots}                  {\ldots}  
+          1991                 0.91             0.28                 0.23  
+          1992                 0.22             0.18                 0.19  
+          1993                 1.00             0.13                 0.48  
+          
+          [1994 rows x 128 columns]
+\end{Verbatim}
+            
+    \hypertarget{replace-nan-with-mean-1.a}{%
+\subsubsection{Replace Nan with mean
+(1.a)}\label{replace-nan-with-mean-1.a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{df}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}134}]:}       state     county     community  communityname  fold  population  \textbackslash{}
+          0         8  58.826829  46188.336597   Lakewoodcity     1        0.19   
+          1        53  58.826829  46188.336597    Tukwilacity     1        0.00   
+          2        24  58.826829  46188.336597   Aberdeentown     1        0.00   
+          {\ldots}     {\ldots}        {\ldots}           {\ldots}            {\ldots}   {\ldots}         {\ldots}   
+          1991      9   9.000000  80070.000000  Waterburytown    10        0.16   
+          1992     25  17.000000  72600.000000    Walthamcity    10        0.08   
+          1993      6  58.826829  46188.336597    Ontariocity    10        0.20   
+          
+                householdsize  racepctblack  racePctWhite  racePctAsian  \textbackslash{}
+          0              0.33          0.02          0.90          0.12   
+          1              0.16          0.12          0.74          0.45   
+          2              0.42          0.49          0.56          0.17   
+          {\ldots}             {\ldots}           {\ldots}           {\ldots}           {\ldots}   
+          1991           0.37          0.25          0.69          0.04   
+          1992           0.51          0.06          0.87          0.22   
+          1993           0.78          0.14          0.46          0.24   
+          
+                       {\ldots}           LandArea  PopDens  PctUsePubTrans  PolicCars  \textbackslash{}
+          0            {\ldots}               0.12     0.26            0.20   0.060000   
+          1            {\ldots}               0.02     0.12            0.45   0.163103   
+          2            {\ldots}               0.01     0.21            0.02   0.163103   
+          {\ldots}          {\ldots}                {\ldots}      {\ldots}             {\ldots}        {\ldots}   
+          1991         {\ldots}               0.08     0.32            0.18   0.080000   
+          1992         {\ldots}               0.03     0.38            0.33   0.020000   
+          1993         {\ldots}               0.11     0.30            0.05   0.080000   
+          
+                PolicOperBudg  LemasPctPolicOnPatr  LemasGangUnitDeploy  \textbackslash{}
+          0          0.040000             0.900000             0.500000   
+          1          0.076708             0.698589             0.440439   
+          2          0.076708             0.698589             0.440439   
+          {\ldots}             {\ldots}                  {\ldots}                  {\ldots}   
+          1991       0.060000             0.780000             0.000000   
+          1992       0.020000             0.790000             0.000000   
+          1993       0.040000             0.730000             0.500000   
+          
+                LemasPctOfficDrugUn  PolicBudgPerPop  ViolentCrimesPerPop  
+          0                    0.32         0.140000                 0.20  
+          1                    0.00         0.195078                 0.67  
+          2                    0.00         0.195078                 0.43  
+          {\ldots}                   {\ldots}              {\ldots}                  {\ldots}  
+          1991                 0.91         0.280000                 0.23  
+          1992                 0.22         0.180000                 0.19  
+          1993                 1.00         0.130000                 0.48  
+          
+          [1994 rows x 128 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{c+c1}{\PYZsh{} list ratios of empty values per columns}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+state                  0.000000
+county                 0.588766
+community              0.590271
+                         {\ldots}   
+LemasPctOfficDrugUn    0.000000
+PolicBudgPerPop        0.840020
+ViolentCrimesPerPop    0.000000
+Length: 128, dtype: float64
+
+    \end{Verbatim}
+
+    It would be a terrible idea to replace all Nan cell with the mean of the
+columns. Here's why: 1. Some columns (e.g.~county) are number
+representing classes. 2. Some nan can acutllay be approximated
+(e.g.~PolicPerPop = PolicReqPerOffic / population). 3. Some columns have
+too many Nans (e.g.~PolicBudgPerPop = 84\% nan) and can be discarted.
+
+    \hypertarget{what-to-do-with-nan-1.b}{%
+\subsubsection{What to do with Nan
+(1.b)}\label{what-to-do-with-nan-1.b}}
+
+    If the column represent clases\ldots{}: 1. and the class ID is truly
+important for the task and there are not too many of them we are trying
+to solve, apply one hot encoding. 2. create a new class (e.g. -1). If
+the column values can be calculated or approximated: 1. replace their
+value with the calculated/approximated value. If the column has too many
+Nans: 1. Remove the column. If the column has very little amount of
+Nans: 1. Remove the observation.
+
+    \hypertarget{better-method-1.c}{%
+\subsubsection{Better Method (1.c)}\label{better-method-1.c}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{c+c1}{\PYZsh{} Printing colums with Nans and ratios of nans/data}
+          \PY{n}{t} \PY{o}{=} \PY{p}{[}\PY{n+nb}{print}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{c}\PY{p}{]}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{c} \PY{o+ow}{in} \PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+county 0.588766298897
+community 0.590270812437
+OtherPerCap 0.000501504513541
+LemasSwornFT 0.840020060181
+LemasSwFTPerPop 0.840020060181
+LemasSwFTFieldOps 0.840020060181
+LemasSwFTFieldPerPop 0.840020060181
+LemasTotalReq 0.840020060181
+LemasTotReqPerPop 0.840020060181
+PolicReqPerOffic 0.840020060181
+PolicPerPop 0.840020060181
+RacialMatchCommPol 0.840020060181
+PctPolicWhite 0.840020060181
+PctPolicBlack 0.840020060181
+PctPolicHisp 0.840020060181
+PctPolicAsian 0.840020060181
+PctPolicMinor 0.840020060181
+OfficAssgnDrugUnits 0.840020060181
+NumKindsDrugsSeiz 0.840020060181
+PolicAveOTWorked 0.840020060181
+PolicCars 0.840020060181
+PolicOperBudg 0.840020060181
+LemasPctPolicOnPatr 0.840020060181
+LemasGangUnitDeploy 0.840020060181
+PolicBudgPerPop 0.840020060181
+--------------------------------------
+
+    \end{Verbatim}
+
+    Categorical Columns:
+
+\begin{verbatim}
+    county --> will replace nan with -1 (creating new category)
+    community --> will be removed b/c according to the documentation, it is not predictive
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Columns with large amount of Nan:
+
+\begin{verbatim}
+    LemasSwornFT, LemasSwFTPerPop, LemasSwFTFieldOps, LemasSwFTFieldPerPop, LemasTotalReq, LemasTotReqPerPop, PolicReqPerOffic, PolicPerPop, RacialMatchCommPol, PctPolicWhite, PctPolicBlack, PctPolicHisp, PctPolicAsian, PctPolicMinor, OfficAssgnDrugUnits, NumKindsDrugsSeiz, PolicAveOTWorked, PolicCars, PolicOperBudg,LemasPctPolicOnPatr, LemasGangUnitDeploy, PolicBudgPerPop
+                  --> will delete the column
+        
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Others:
+
+\begin{verbatim}
+    OtherPerCap --> replaced with average
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{c+c1}{\PYZsh{} Remove column with too many Nan}
+          \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} Remove \PYZsq{}community\PYZsq{}}
+          \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{labels} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{community}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{c+c1}{\PYZsh{} Replace Nan with \PYZhy{}1 for }
+          \PY{n}{df}\PY{o}{.}\PY{n}{OtherPerCap} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{OtherPerCap}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{OtherPerCap}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{df}\PY{o}{.}\PY{n}{county} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{county}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    This is better because: 1. We only keep features that matter and have
+information in them. 2. We keep all the information that `county' can
+provide and signal the model that there are data that wasn't labeled. 3.
+We add information by replacing `OtherPerCap' nans with average.
+
+    \hypertarget{save-dataset}{%
+\subsubsection{Save dataset}\label{save-dataset}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}or\PYZus{}buf}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{communities\PYZus{}modified.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{part-2}{%
+\subsection{Part 2}\label{part-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}k\PYZus{}fold\PYZus{}cross\PYZus{}val}\PY{p}{(}\PY{n}{dataframe}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{val\PYZus{}ids} \PY{o}{=} \PY{n}{rd}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dataframe}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{dataframe}\PY{p}{)}\PY{o}{/}\PY{n}{k}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{val\PYZus{}df} \PY{o}{=} \PY{n}{dataframe}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{val\PYZus{}ids}\PY{p}{]}
+                  \PY{n}{train\PYZus{}ids} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{dataframe}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{set}\PY{p}{(}\PY{n}{val\PYZus{}ids}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{train\PYZus{}df} \PY{o}{=} \PY{n}{dataframe}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{train\PYZus{}ids}\PY{p}{]}
+                  \PY{n}{train\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}or\PYZus{}buf}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandC\PYZus{}train\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{val\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{path\PYZus{}or\PYZus{}buf}\PY{o}{=}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandC\PYZus{}val\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+              \PY{k}{return} 
+              
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}226}]:} \PY{n}{make\PYZus{}k\PYZus{}fold\PYZus{}cross\PYZus{}val}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{exclude}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{object}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}307}]:} \PY{k}{def} \PY{n+nf}{loss}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{:}
+              \PY{n}{ys} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{ys}\PY{p}{)}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{xs}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{w}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{ys}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xs}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}fcts}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{:}
+              \PY{n}{x\PYZus{}lin} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{xs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{max}\PY{p}{(}\PY{n}{xs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{200}\PY{p}{)}
+              \PY{n}{pred} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{x\PYZus{}lin}\PY{p}{:}
+                  \PY{n}{pred}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{polyval}\PY{p}{(}\PY{n}{w}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+                  
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}lin}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{pred}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ro}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                       \PY{n}{xs}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{ys}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+              \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mf}{18.5}\PY{p}{,} \PY{l+m+mf}{10.5}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+          \PY{k}{def} \PY{n+nf}{train}\PY{p}{(}\PY{n}{df\PYZus{}train}\PY{p}{,} \PY{n}{df\PYZus{}val}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{learning\PYZus{}rate}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} train and valication data}
+              \PY{n}{xs}\PY{p}{,} \PY{n}{ys} \PY{o}{=} \PY{n}{df\PYZus{}train}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ViolentCrimesPerPop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{df\PYZus{}train}\PY{o}{.}\PY{n}{ViolentCrimesPerPop}\PY{o}{.}\PY{n}{values}
+              \PY{n}{x\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}val} \PY{o}{=} \PY{n}{df\PYZus{}val}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{df}\PY{o}{.}\PY{n}{columns} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ViolentCrimesPerPop}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{df\PYZus{}val}\PY{o}{.}\PY{n}{ViolentCrimesPerPop}\PY{o}{.}\PY{n}{values}
+          
+          
+              \PY{c+c1}{\PYZsh{} Training loop, stoping based on rolling\PYZus{}mse}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} choosing x randomly, to introduce randomess in the model}
+                  \PY{n}{position} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{xs}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{xs}\PY{p}{[}\PY{n}{position}\PY{p}{]}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}  \PY{c+c1}{\PYZsh{} for matrix multiplication}
+          
+                  \PY{n}{y} \PY{o}{=} \PY{n}{ys}\PY{p}{[}\PY{n}{position}\PY{p}{]}
+          
+                  \PY{n}{w} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{learning\PYZus{}rate} \PY{o}{*} \PY{n}{loss}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{w}\PY{p}{)}
+                  
+              \PY{k}{return} \PY{n}{w}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}308}]:} \PY{n}{w\PYZus{}} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{10}
+          \PY{n}{df\PYZus{}train}\PY{p}{,} \PY{n}{df\PYZus{}val} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandC\PYZus{}train\PYZus{}0.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{CandC\PYZus{}val\PYZus{}0.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index\PYZus{}col} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{weights\PYZus{}} \PY{o}{=} \PY{n}{train}\PY{p}{(}\PY{n}{df\PYZus{}train}\PY{p}{,} \PY{n}{df\PYZus{}val}\PY{p}{,} \PY{n}{w\PYZus{}}\PY{p}{,} \PY{l+m+mf}{1e\PYZhy{}2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}312}]:} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        TypeError                                 Traceback (most recent call last)
+
+        <ipython-input-312-50df40d75f52> in <module>()
+    ----> 1 np.polyfit(df\_train.loc[:, df.columns != 'ViolentCrimesPerPop'].values, df\_train.ViolentCrimesPerPop.values, 3)
+    
+
+        /Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/numpy/lib/polynomial.py in polyfit(x, y, deg, rcond, full, w, cov)
+        551         raise ValueError("expected deg >= 0")
+        552     if x.ndim != 1:
+    --> 553         raise TypeError("expected 1D vector for x")
+        554     if x.size == 0:
+        555         raise TypeError("expected non-empty vector for x")
+
+
+        TypeError: expected 1D vector for x
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}256}]:} \PY{n}{data\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}257}]:} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{ones\PYZus{}like}\PY{p}{(}\PY{n}{data\PYZus{}x}\PY{p}{)}\PY{p}{,} \PY{n}{data\PYZus{}x}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}257}]:} array([[  1.        ,   1.        ],
+                 [  1.        ,   1.09090909],
+                 [  1.        ,   1.18181818],
+                 [  1.        ,   1.27272727],
+                 [  1.        ,   1.36363636],
+                 [  1.        ,   1.45454545],
+                 [  1.        ,   1.54545455],
+                 [  1.        ,   1.63636364],
+                 [  1.        ,   1.72727273],
+                 [  1.        ,   1.81818182],
+                 [  1.        ,   1.90909091],
+                 [  1.        ,   2.        ],
+                 [  1.        ,   2.09090909],
+                 [  1.        ,   2.18181818],
+                 [  1.        ,   2.27272727],
+                 [  1.        ,   2.36363636],
+                 [  1.        ,   2.45454545],
+                 [  1.        ,   2.54545455],
+                 [  1.        ,   2.63636364],
+                 [  1.        ,   2.72727273],
+                 [  1.        ,   2.81818182],
+                 [  1.        ,   2.90909091],
+                 [  1.        ,   3.        ],
+                 [  1.        ,   3.09090909],
+                 [  1.        ,   3.18181818],
+                 [  1.        ,   3.27272727],
+                 [  1.        ,   3.36363636],
+                 [  1.        ,   3.45454545],
+                 [  1.        ,   3.54545455],
+                 [  1.        ,   3.63636364],
+                 [  1.        ,   3.72727273],
+                 [  1.        ,   3.81818182],
+                 [  1.        ,   3.90909091],
+                 [  1.        ,   4.        ],
+                 [  1.        ,   4.09090909],
+                 [  1.        ,   4.18181818],
+                 [  1.        ,   4.27272727],
+                 [  1.        ,   4.36363636],
+                 [  1.        ,   4.45454545],
+                 [  1.        ,   4.54545455],
+                 [  1.        ,   4.63636364],
+                 [  1.        ,   4.72727273],
+                 [  1.        ,   4.81818182],
+                 [  1.        ,   4.90909091],
+                 [  1.        ,   5.        ],
+                 [  1.        ,   5.09090909],
+                 [  1.        ,   5.18181818],
+                 [  1.        ,   5.27272727],
+                 [  1.        ,   5.36363636],
+                 [  1.        ,   5.45454545],
+                 [  1.        ,   5.54545455],
+                 [  1.        ,   5.63636364],
+                 [  1.        ,   5.72727273],
+                 [  1.        ,   5.81818182],
+                 [  1.        ,   5.90909091],
+                 [  1.        ,   6.        ],
+                 [  1.        ,   6.09090909],
+                 [  1.        ,   6.18181818],
+                 [  1.        ,   6.27272727],
+                 [  1.        ,   6.36363636],
+                 [  1.        ,   6.45454545],
+                 [  1.        ,   6.54545455],
+                 [  1.        ,   6.63636364],
+                 [  1.        ,   6.72727273],
+                 [  1.        ,   6.81818182],
+                 [  1.        ,   6.90909091],
+                 [  1.        ,   7.        ],
+                 [  1.        ,   7.09090909],
+                 [  1.        ,   7.18181818],
+                 [  1.        ,   7.27272727],
+                 [  1.        ,   7.36363636],
+                 [  1.        ,   7.45454545],
+                 [  1.        ,   7.54545455],
+                 [  1.        ,   7.63636364],
+                 [  1.        ,   7.72727273],
+                 [  1.        ,   7.81818182],
+                 [  1.        ,   7.90909091],
+                 [  1.        ,   8.        ],
+                 [  1.        ,   8.09090909],
+                 [  1.        ,   8.18181818],
+                 [  1.        ,   8.27272727],
+                 [  1.        ,   8.36363636],
+                 [  1.        ,   8.45454545],
+                 [  1.        ,   8.54545455],
+                 [  1.        ,   8.63636364],
+                 [  1.        ,   8.72727273],
+                 [  1.        ,   8.81818182],
+                 [  1.        ,   8.90909091],
+                 [  1.        ,   9.        ],
+                 [  1.        ,   9.09090909],
+                 [  1.        ,   9.18181818],
+                 [  1.        ,   9.27272727],
+                 [  1.        ,   9.36363636],
+                 [  1.        ,   9.45454545],
+                 [  1.        ,   9.54545455],
+                 [  1.        ,   9.63636364],
+                 [  1.        ,   9.72727273],
+                 [  1.        ,   9.81818182],
+                 [  1.        ,   9.90909091],
+                 [  1.        ,  10.        ]])
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
